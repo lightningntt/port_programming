@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO.Ports;
+using System.IO;
+
+namespace port_programming
+{
+    class Program
+    {
+      //  static SerialPort mySerialPort;
+        static void Main(string[] args)
+        {
+            SerialPort mySerialPort = new SerialPort("COM8", 9600);
+            
+            try
+            {
+                mySerialPort.Open();
+             //   mySerialPort.Write("Hello World");
+             while (true)
+                {
+                    if (mySerialPort.BytesToRead > 0)
+                    {
+                        char b = (char)mySerialPort.ReadChar();
+                        Console.WriteLine(b);
+                    }
+                }
+
+
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            //mySerialPort.Close();
+        }
+    }
+}
